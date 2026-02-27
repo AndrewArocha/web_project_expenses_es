@@ -38,13 +38,45 @@ function updateBalanceColor () {
     }
 }
 
-function calculateCategoryExpenses (category) {
-    let categoryTotal = 0;    
-    for (let i = 0; i < expenseEntries.length; i++) {
-        const expense = expenseEntries[i]
-    if (expense[0] === category) {
-        categoryTotal+=expense[1]
+function calculateCategoryExpenses(category) {
+    let categoryTotal = 0;
+
+    for (const expense of expenseEntries) {
+        if (expense[0] === category) {
+            categoryTotal += expense[1];
+        }
     }
-    }
+
     return categoryTotal;
+}
+
+function calculateLargestCategory() {
+  const categories = ["groceries","restaurants","transport","home","subscriptions"];
+  let categoriesData = [];
+
+  let largestCategory = "";
+  let largestAmount = 0;
+
+  for (const category of categories) {
+    const total = calculateCategoryExpenses(category);
+    categoriesData.push([category,total])
+  }
+
+  for (let data of categoriesData) {
+    const categoryItem = data[0];
+    const categoryValue = data[1];
+
+    if (categoryValue > largestAmount) {
+        largestAmount = categoryValue
+        largestCategory = categoryItem
     }
+  }
+
+  return largestCategory;
+}
+
+function addExpenseEntry(entry) {
+    expenseEntries.push(entry);
+    totalExpensesValue+= entry[1]
+}
+
