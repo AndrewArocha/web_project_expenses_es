@@ -34,7 +34,7 @@ function updateBalanceColor () {
     } else if (calculateBalance() < budgetValue * 0.25) {
         balanceColor = "orange"
     } else {
-         balanceColor = calculateBalance()
+         balanceColor = "green"
     }
 }
 
@@ -79,4 +79,3 @@ function addExpenseEntry(entry) {
     expenseEntries.push(entry);
     totalExpensesValue+= entry[1]
 }
-
